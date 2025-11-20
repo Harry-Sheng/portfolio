@@ -16,10 +16,10 @@ export function ProfileHeader() {
         />
       </div>
       <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl">
-        Harry
+        Harry Sheng
       </h1>
       <h2 className="mt-2 text-xl font-medium text-gray-600 dark:text-gray-300">
-        Software Engineer & Researcher
+        Full-Stack Software Engineer
       </h2>
     </GlassCard>
   );
@@ -30,8 +30,9 @@ export function BioCard() {
     <GlassCard className="h-full flex flex-col justify-center">
       <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">About Me</h3>
       <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-        Specializing in full-stack development, machine learning, and security. 
-        Building robust platforms and exploring AI vulnerabilities.
+        Specialising in full-stack development. Proven track record in
+building end-to-end web applications with scalable backend services and intuitive frontend experiences. Ready to
+leverage my passion and expertise to enable the business growth of organisations
       </p>
     </GlassCard>
   );

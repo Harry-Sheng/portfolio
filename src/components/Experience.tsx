@@ -10,15 +10,15 @@ const experiences = [
   {
     id: 1,
     role: "Software Engineer",
-    company: "WDCC",
-    period: "Mar 2025 - Present",
+    company: "WDCC, University of Auckland",
+    period: "Mar 2025 - Nov 2025",
     description: "Led a 10-person student development team to build a Next.js website streamlining club operations for a chamber orchestra, transforming client requirements into actionable roadmaps while conducting weekly help sessions to ensure timely delivery.",
   },
   {
     id: 2,
     role: "Teaching Assistant",
     company: "University of Auckland",
-    period: "Mar 2025 - Present",
+    period: "Mar 2025 - Nov 2025",
     description: "Mentored CS101 and CS130 students through weekly Python tutorials, providing guidance and clarifying algorithmic principles.",
   },
   {
@@ -196,7 +196,7 @@ export function Experience() {
             }}
             className="h-full flex flex-col justify-center select-none"
           >
-            <div className="inline-flex self-start px-3 py-1 rounded-full bg-purple-500/10 text-purple-600 dark:text-purple-400 text-xs font-medium mb-3 border border-purple-500/20">
+            <div className="inline-flex self-start px-3 py-1 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 text-xs font-medium mb-3 border border-blue-500/20">
               {experiences[currentIndex].period}
             </div>
             <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">
@@ -220,8 +220,8 @@ export function Experience() {
             onClick={() => goTo(idx)}
             className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
               idx === currentIndex
-                ? "bg-purple-500 w-4"
-                : "bg-gray-300 dark:bg-gray-600 hover:bg-purple-400"
+                ? "bg-blue-500 w-4"
+                : "bg-gray-300 dark:bg-gray-600 hover:bg-blue-400"
             }`}
             aria-label={`Go to experience ${idx + 1}`}
           />

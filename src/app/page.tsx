@@ -22,8 +22,8 @@ export default function Home() {
         </BentoItem>
         <BentoItem>
           <Link href="/blog" className="block h-full">
-            <GlassCard className="h-full flex flex-col items-center justify-center text-center group hover:bg-purple-500/20 transition-colors">
-              <BookOpen className="w-8 h-8 mb-2 text-purple-500 group-hover:scale-110 transition-transform" />
+            <GlassCard className="h-full flex flex-col items-center justify-center text-center group hover:bg-blue-500/20 transition-colors">
+              <BookOpen className="w-8 h-8 mb-2 text-blue-500 group-hover:scale-110 transition-transform" />
               <h2 className="text-lg font-bold text-gray-900 dark:text-white">
                 Blog
               </h2>

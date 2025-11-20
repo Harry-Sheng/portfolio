@@ -10,7 +10,7 @@ export default function BlogIndex() {
     <main className="max-w-3xl mx-auto space-y-8">
       <Link
         href="/"
-        className="inline-flex items-center text-gray-600 dark:text-gray-400 hover:text-purple-500 transition-colors"
+        className="inline-flex items-center text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-colors"
       >
         <ArrowLeft className="w-4 h-4 mr-2" />
         Back to Home
