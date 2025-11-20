@@ -2,7 +2,7 @@
 
 import { GlassCard } from "./GlassCard";
 import { Briefcase, ChevronLeft, ChevronRight } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import * as motion from "framer-motion/client";
 import { AnimatePresence } from "framer-motion";
 
@@ -47,6 +47,10 @@ const experiences = [
 export function Experience() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+  const wheelTimeout = useRef<NodeJS.Timeout | null>(null);
+  const isNavigating = useRef(false);
 
   const variants = {
     enter: (direction: number) => ({
@@ -66,18 +70,80 @@ export function Experience() {
   };
 
   const next = () => {
+    if (isNavigating.current) return;
+    isNavigating.current = true;
     setDirection(1);
     setCurrentIndex((prev) => (prev + 1) % experiences.length);
+    setTimeout(() => {
+      isNavigating.current = false;
+    }, 500);
   };
 
   const prev = () => {
+    if (isNavigating.current) return;
+    isNavigating.current = true;
     setDirection(-1);
     setCurrentIndex((prev) => (prev - 1 + experiences.length) % experiences.length);
+    setTimeout(() => {
+      isNavigating.current = false;
+    }, 500);
   };
 
   const goTo = (idx: number) => {
+    if (isNavigating.current) return;
+    isNavigating.current = true;
     setDirection(idx > currentIndex ? 1 : -1);
     setCurrentIndex(idx);
+    setTimeout(() => {
+      isNavigating.current = false;
+    }, 500);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.targetTouches[0].clientX);
+    setTouchEnd(0);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe) {
+      next();
+    } else if (isRightSwipe) {
+      prev();
+    }
+
+    setTouchStart(0);
+    setTouchEnd(0);
+  };
+
+  const handleWheel = (e: React.WheelEvent) => {
+    // Detect horizontal scroll (two-finger swipe on trackpad)
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY) && Math.abs(e.deltaX) > 10) {
+      e.preventDefault();
+      
+      // Clear existing timeout
+      if (wheelTimeout.current) {
+        clearTimeout(wheelTimeout.current);
+      }
+
+      // Debounce the wheel event
+      wheelTimeout.current = setTimeout(() => {
+        if (e.deltaX > 0) {
+          next();
+        } else if (e.deltaX < 0) {
+          prev();
+        }
+      }, 50);
+    }
   };
 
   return (
@@ -109,7 +175,13 @@ export function Experience() {
         </div>
       </div>
 
-      <div className="flex-1 relative overflow-hidden">
+      <div 
+        className="flex-1 relative overflow-hidden"
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        onWheel={handleWheel}
+      >
         <AnimatePresence initial={false} custom={direction} mode="wait">
           <motion.div
             key={currentIndex}
@@ -122,7 +194,7 @@ export function Experience() {
               x: { type: "spring", stiffness: 300, damping: 30 },
               opacity: { duration: 0.2 },
             }}
-            className="h-full flex flex-col justify-center"
+            className="h-full flex flex-col justify-center select-none"
           >
             <div className="inline-flex self-start px-3 py-1 rounded-full bg-purple-500/10 text-purple-600 dark:text-purple-400 text-xs font-medium mb-3 border border-purple-500/20">
               {experiences[currentIndex].period}
