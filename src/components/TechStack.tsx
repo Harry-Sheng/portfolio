@@ -1,5 +1,5 @@
 import { GlassCard } from "./GlassCard";
-import { Code2, Database, Globe, Layout, Server, Smartphone } from "lucide-react";
+import { Brain, Cloud, Code2, Coffee, Globe, Smartphone } from "lucide-react";
 
 export function TechStack() {
   return (
@@ -7,11 +7,11 @@ export function TechStack() {
       <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Tech Stack</h3>
       <div className="grid grid-cols-3 gap-4">
         <TechItem icon={<Globe className="w-6 h-6" />} label="Next.js" />
-        <TechItem icon={<Layout className="w-6 h-6" />} label="Tailwind" />
         <TechItem icon={<Code2 className="w-6 h-6" />} label="React" />
-        <TechItem icon={<Server className="w-6 h-6" />} label="Node.js" />
-        <TechItem icon={<Database className="w-6 h-6" />} label="Postgres" />
-        <TechItem icon={<Smartphone className="w-6 h-6" />} label="Mobile" />
+        <TechItem icon={<Coffee className="w-6 h-6" />} label="Java" />
+        <TechItem icon={<Cloud className="w-6 h-6" />} label="AWS" />
+        <TechItem icon={<Brain className="w-6 h-6" />} label="Python" />
+        <TechItem icon={<Smartphone className="w-6 h-6" />} label="Android" />
       </div>
     </GlassCard>
   );

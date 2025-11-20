@@ -19,7 +19,7 @@ export function ProfileHeader() {
         Harry
       </h1>
       <h2 className="mt-2 text-xl font-medium text-gray-600 dark:text-gray-300">
-        Full Stack Developer
+        Software Engineer & Researcher
       </h2>
     </GlassCard>
   );
@@ -30,8 +30,8 @@ export function BioCard() {
     <GlassCard className="h-full flex flex-col justify-center">
       <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">About Me</h3>
       <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-        I build accessible, pixel-perfect, performant, and beautiful web experiences.
-        Passionate about liquid interfaces and glassmorphism.
+        Specializing in full-stack development, machine learning, and security. 
+        Building robust platforms and exploring AI vulnerabilities.
       </p>
     </GlassCard>
   );

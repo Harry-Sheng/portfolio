@@ -46,13 +46,38 @@ const experiences = [
 
 export function Experience() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
+
+  const variants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? 50 : -50,
+      opacity: 0,
+    }),
+    center: {
+      zIndex: 1,
+      x: 0,
+      opacity: 1,
+    },
+    exit: (direction: number) => ({
+      zIndex: 0,
+      x: direction < 0 ? 50 : -50,
+      opacity: 0,
+    }),
+  };
 
   const next = () => {
+    setDirection(1);
     setCurrentIndex((prev) => (prev + 1) % experiences.length);
   };
 
   const prev = () => {
+    setDirection(-1);
     setCurrentIndex((prev) => (prev - 1 + experiences.length) % experiences.length);
+  };
+
+  const goTo = (idx: number) => {
+    setDirection(idx > currentIndex ? 1 : -1);
+    setCurrentIndex(idx);
   };
 
   return (
@@ -63,31 +88,40 @@ export function Experience() {
           Experience
         </h2>
         <div className="flex gap-1">
-          <button
+          <motion.button
+            whileHover={{ scale: 1.1, backgroundColor: "rgba(255,255,255,0.2)" }}
+            whileTap={{ scale: 0.9 }}
             onClick={prev}
             className="p-1 rounded-full hover:bg-white/10 text-gray-600 dark:text-gray-300 transition-colors"
             aria-label="Previous experience"
           >
             <ChevronLeft className="w-5 h-5" />
-          </button>
-          <button
+          </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.1, backgroundColor: "rgba(255,255,255,0.2)" }}
+            whileTap={{ scale: 0.9 }}
             onClick={next}
             className="p-1 rounded-full hover:bg-white/10 text-gray-600 dark:text-gray-300 transition-colors"
             aria-label="Next experience"
           >
             <ChevronRight className="w-5 h-5" />
-          </button>
+          </motion.button>
         </div>
       </div>
 
       <div className="flex-1 relative overflow-hidden">
-        <AnimatePresence mode="wait">
+        <AnimatePresence initial={false} custom={direction} mode="wait">
           <motion.div
             key={currentIndex}
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            transition={{ duration: 0.2 }}
+            custom={direction}
+            variants={variants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{
+              x: { type: "spring", stiffness: 300, damping: 30 },
+              opacity: { duration: 0.2 },
+            }}
             className="h-full flex flex-col justify-center"
           >
             <div className="inline-flex self-start px-3 py-1 rounded-full bg-purple-500/10 text-purple-600 dark:text-purple-400 text-xs font-medium mb-3 border border-purple-500/20">
@@ -108,9 +142,10 @@ export function Experience() {
 
       <div className="mt-4 flex justify-center gap-1.5">
         {experiences.map((_, idx) => (
-          <button
+          <motion.button
             key={idx}
-            onClick={() => setCurrentIndex(idx)}
+            whileHover={{ scale: 1.2 }}
+            onClick={() => goTo(idx)}
             className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
               idx === currentIndex
                 ? "bg-purple-500 w-4"
