@@ -8,7 +8,7 @@ export function ProfileHeader() {
       <div className="relative w-40 h-40 mb-6">
         <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-purple-400 to-pink-400 animate-pulse blur-lg opacity-50"></div>
         <Image
-          src="/placeholder-avatar.svg"
+          src="/harry.jpeg"
           alt="Profile"
           width={160}
           height={160}
@@ -32,7 +32,7 @@ export function BioCard() {
       <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
         Specialising in full-stack development. Proven track record in
 building end-to-end web applications with scalable backend services and intuitive frontend experiences. Ready to
-leverage my passion and expertise to enable the business growth of organisations
+leverage my passion and expertise to enable the business growth of organisations.
       </p>
     </GlassCard>
   );
