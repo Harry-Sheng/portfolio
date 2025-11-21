@@ -1,5 +1,5 @@
 import { GlassCard } from "./GlassCard";
-import { Github, Linkedin, Mail, Twitter } from "lucide-react";
+import { Github, Linkedin, Mail, Dumbbell } from "lucide-react";
 import Image from "next/image";
 
 export function ProfileHeader() {
@@ -41,10 +41,10 @@ leverage my passion and expertise to enable the business growth of organisations
 export function SocialsCard() {
   return (
     <GlassCard className="h-full flex items-center justify-center gap-4 flex-wrap">
-      <SocialLink href="https://github.com" icon={<Github className="w-5 h-5" />} label="GitHub" />
-      <SocialLink href="https://linkedin.com" icon={<Linkedin className="w-5 h-5" />} label="LinkedIn" />
-      <SocialLink href="https://twitter.com" icon={<Twitter className="w-5 h-5" />} label="Twitter" />
-      <SocialLink href="mailto:hello@example.com" icon={<Mail className="w-5 h-5" />} label="Email" />
+      <SocialLink href="https://github.com/Harry-Sheng" icon={<Github className="w-5 h-5" />} label="GitHub" />
+      <SocialLink href="https://www.linkedin.com/in/harry-sheng-35729b2a4/?skipRedirect=true" icon={<Linkedin className="w-5 h-5" />} label="LinkedIn" />
+      <SocialLink href="https://liftlog-web-client-222314261215.australia-southeast1.run.app/" icon={<Dumbbell className="w-5 h-5" />} label="dumbbell" />
+      <SocialLink href="mailto:harryshengcoding@gmail.com" icon={<Mail className="w-5 h-5" />} label="Email" />
     </GlassCard>
   );
 }
