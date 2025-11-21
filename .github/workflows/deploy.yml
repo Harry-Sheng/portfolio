@@ -30,7 +30,7 @@ jobs:
         with:
           personal_token: ${{ secrets.DEPLOY_TOKEN }}
           external_repository: HarryShengCS/HarryShengCS.github.io
-          publish_branch: main
+          publish_branch: gh-pages
           publish_dir: ./out
           force_orphan: true
           enable_jekyll: false
