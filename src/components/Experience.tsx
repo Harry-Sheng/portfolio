@@ -204,9 +204,10 @@ export function Experience() {
             animate="center"
             exit="exit"
             transition={{
-              x: { type: "spring", stiffness: 300, damping: 30 },
+              x: { type: "tween", duration: 0.3, ease: "easeInOut" },
               opacity: { duration: 0.2 },
             }}
+            style={{ willChange: "transform, opacity" }}
             className="h-full flex flex-col justify-center select-none"
           >
             <div className="inline-flex self-start px-3 py-1 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 text-xs font-medium mb-3 border border-blue-500/20">

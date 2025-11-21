@@ -32,20 +32,24 @@ export default function Home() {
           </Link>
         </BentoItem>
 
-        {/* Middle: Experience & Tech Stack */}
-        <BentoItem colSpan={2} rowSpan={2}>
+        {/* About Me - appears early on mobile, positioned via order on desktop */}
+        <BentoItem colSpan={2} className="md:order-6">
+          <BioCard />
+        </BentoItem>
+
+        {/* Experience */}
+        <BentoItem colSpan={2} rowSpan={2} className="md:order-3">
           <Experience />
         </BentoItem>
-        <BentoItem colSpan={2}>
+        
+        {/* Tech Stack */}
+        <BentoItem colSpan={2} className="md:order-4">
            <TechStack />
         </BentoItem>
 
-        {/* Bottom: Location & Bio */}
-        <BentoItem colSpan={2}>
+        {/* Location */}
+        <BentoItem colSpan={2} className="md:order-5">
           <LocationCard />
-        </BentoItem>
-        <BentoItem colSpan={2}>
-          <BioCard />
         </BentoItem>
       </BentoGrid>
     </main>
