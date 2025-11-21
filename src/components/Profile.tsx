@@ -6,7 +6,7 @@ export function ProfileHeader() {
   return (
     <GlassCard className="h-full flex flex-col justify-center items-center text-center p-8">
       <div className="relative w-40 h-40 mb-6">
-        <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-purple-400 to-pink-400 animate-pulse blur-lg opacity-50"></div>
+        <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-purple-400 to-blue-400 animate-pulse blur-lg opacity-50"></div>
         <Image
           src="/harry.jpeg"
           alt="Profile"
