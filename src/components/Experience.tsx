@@ -55,7 +55,7 @@ export function Experience() {
 
   const variants = {
     enter: (direction: number) => ({
-      x: direction > 0 ? 50 : -50,
+      x: direction > 0 ? 20 : -20,
       opacity: 0,
     }),
     center: {
@@ -65,7 +65,7 @@ export function Experience() {
     },
     exit: (direction: number) => ({
       zIndex: 0,
-      x: direction < 0 ? 50 : -50,
+      x: direction < 0 ? 20 : -20,
       opacity: 0,
     }),
   };
@@ -77,7 +77,7 @@ export function Experience() {
     setCurrentIndex((prev) => (prev + 1) % experiences.length);
     setTimeout(() => {
       isNavigating.current = false;
-    }, 500);
+    }, 250);
   };
 
   const prev = () => {
@@ -87,7 +87,7 @@ export function Experience() {
     setCurrentIndex((prev) => (prev - 1 + experiences.length) % experiences.length);
     setTimeout(() => {
       isNavigating.current = false;
-    }, 500);
+    }, 250);
   };
 
   const goTo = (idx: number) => {
@@ -97,7 +97,7 @@ export function Experience() {
     setCurrentIndex(idx);
     setTimeout(() => {
       isNavigating.current = false;
-    }, 500);
+    }, 250);
   };
 
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -204,10 +204,13 @@ export function Experience() {
             animate="center"
             exit="exit"
             transition={{
-              x: { type: "tween", duration: 0.3, ease: "easeInOut" },
-              opacity: { duration: 0.2 },
+              x: { type: "tween", duration: 0.2, ease: [0.4, 0, 0.2, 1] },
+              opacity: { duration: 0.15 },
             }}
-            style={{ willChange: "transform, opacity" }}
+            style={{ 
+              willChange: "transform, opacity",
+              transform: "translate3d(0, 0, 0)",
+            }}
             className="h-full flex flex-col justify-center select-none"
           >
             <div className="inline-flex self-start px-3 py-1 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 text-xs font-medium mb-3 border border-blue-500/20">
