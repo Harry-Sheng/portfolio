@@ -14,9 +14,9 @@ export function GlassCard({ children, className, noHover = false }: GlassCardPro
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      whileHover={!noHover ? { scale: 1.02, backgroundColor: "rgba(255, 255, 255, 0.15)" } : undefined}
+      whileHover={!noHover ? { scale: 1.02 } : undefined}
       className={cn(
-        "relative overflow-hidden rounded-3xl border border-white/20 bg-white/10 p-6 shadow-xl backdrop-blur-md transition-colors dark:border-white/10 dark:bg-black/10 dark:hover:bg-black/20",
+        "relative overflow-hidden rounded-3xl border border-white/20 bg-white/10 p-6 shadow-xl backdrop-blur-md transition-all duration-300 dark:border-white/10 dark:bg-black/10 hover:bg-white/15 dark:hover:bg-black/15",
         className
       )}
     >
