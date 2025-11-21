@@ -2,7 +2,7 @@
 
 import { GlassCard } from "./GlassCard";
 import { Briefcase, ChevronLeft, ChevronRight } from "lucide-react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import * as motion from "framer-motion/client";
 import { AnimatePresence } from "framer-motion";
 
@@ -51,6 +51,7 @@ export function Experience() {
   const [touchEnd, setTouchEnd] = useState(0);
   const wheelTimeout = useRef<NodeJS.Timeout | null>(null);
   const isNavigating = useRef(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const variants = {
     enter: (direction: number) => ({
@@ -125,29 +126,41 @@ export function Experience() {
     setTouchEnd(0);
   };
 
-  const handleWheel = (e: React.WheelEvent) => {
-    // Detect horizontal scroll (two-finger swipe on trackpad)
-    if (Math.abs(e.deltaX) > Math.abs(e.deltaY) && Math.abs(e.deltaX) > 10) {
-      e.preventDefault();
-      
-      // Clear existing timeout
-      if (wheelTimeout.current) {
-        clearTimeout(wheelTimeout.current);
-      }
+  // Use direct DOM event listener for wheel to allow preventDefault
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
 
-      // Debounce the wheel event
-      wheelTimeout.current = setTimeout(() => {
-        if (e.deltaX > 0) {
-          next();
-        } else if (e.deltaX < 0) {
-          prev();
+    const handleWheel = (e: WheelEvent) => {
+      // Detect horizontal scroll (two-finger swipe on trackpad)
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY) && Math.abs(e.deltaX) > 10) {
+        e.preventDefault();
+        
+        // Clear existing timeout
+        if (wheelTimeout.current) {
+          clearTimeout(wheelTimeout.current);
         }
-      }, 50);
-    }
-  };
+
+        // Debounce the wheel event
+        wheelTimeout.current = setTimeout(() => {
+          if (e.deltaX > 0) {
+            next();
+          } else if (e.deltaX < 0) {
+            prev();
+          }
+        }, 50);
+      }
+    };
+
+    container.addEventListener('wheel', handleWheel, { passive: false });
+    
+    return () => {
+      container.removeEventListener('wheel', handleWheel);
+    };
+  }, []);
 
   return (
-    <GlassCard className="h-full flex flex-col relative group">
+    <GlassCard className="h-[400px] md:h-[450px] flex flex-col relative group">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
           <Briefcase className="w-5 h-5" />
@@ -176,11 +189,11 @@ export function Experience() {
       </div>
 
       <div 
+        ref={containerRef}
         className="flex-1 relative overflow-hidden"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
-        onWheel={handleWheel}
       >
         <AnimatePresence initial={false} custom={direction} mode="wait">
           <motion.div
